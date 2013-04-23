@@ -27,7 +27,7 @@ package { ['sqlite3', 'libsqlite3-dev']:
   ensure => installed;
 }
 
-# --- MySQL --------------------------------------------------------------------
+#--- MySQL --------------------------------------------------------------------
 
 class install_mysql {
   class { 'mysql': }
@@ -93,11 +93,11 @@ class install_postgres {
 }
 class { 'install_postgres': }
 
-# --- Memcached ----------------------------------------------------------------
+## --- Memcached ----------------------------------------------------------------
 
 class { 'memcached': }
 
-# --- Packages -----------------------------------------------------------------
+##--- Packages -----------------------------------------------------------------
 
 package { 'curl':
   ensure => installed
@@ -121,26 +121,10 @@ package { 'nodejs':
   ensure => installed
 }
 
-# --- Ruby ---------------------------------------------------------------------
+## --- Ruby ---------------------------------------------------------------------
 
 exec { 'install_rvm':
   command => "${as_vagrant} 'curl -L https://get.rvm.io | bash -s stable'",
   creates => "${home}/.rvm",
   require => Package['curl']
-}
-
-exec { 'install_ruby':
-  # We run the rvm executable directly because the shell function assumes an
-  # interactive environment, in particular to display messages or ask questions.
-  # The rvm executable is more suitable for automated installs.
-  #
-  # Thanks to @mpapis for this tip.
-  command => "${as_vagrant} '${home}/.rvm/bin/rvm install 2.0.0 --latest-binary --autolibs=enabled && rvm --fuzzy alias create default 2.0.0'",
-  creates => "${home}/.rvm/bin/ruby",
-  require => Exec['install_rvm']
-}
-
-exec { "${as_vagrant} 'gem install bundler --no-rdoc --no-ri'":
-  creates => "${home}/.rvm/bin/bundle",
-  require => Exec['install_ruby']
 }
