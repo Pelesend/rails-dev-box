@@ -16,7 +16,7 @@ Please note this virtual machine is not designed to be used for Rails applicatio
 
 Building the virtual machine is this easy:
 
-    host $ git clone https://github.com/rails/rails-dev-box.git
+    host $ git clone https://github.com/Pelesend/rails-dev-box.git
     host $ cd rails-dev-box
     host $ vagrant up
 
@@ -37,7 +37,7 @@ Port 3000 in the host computer is forwarded to port 3000 in the virtual machine.
 
 * RVM
 
-* Ruby 2.0.0 (binary RVM install)
+* Ruby 1.9.3 (binary RVM install)
 
 * Bundler
 
