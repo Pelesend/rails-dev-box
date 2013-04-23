@@ -7,7 +7,6 @@ Vagrant::Config.run do |config|
 
   Vagrant.configure("2") do |config|
     config.vm.synced_folder "/Users/kiote/www/", "/home/vagrant/www"
-    config.vm.synced_folder ".", "/vagrant", :nfs => true
   end
 
   config.vm.provision :puppet,
