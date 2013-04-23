@@ -5,6 +5,8 @@ Vagrant::Config.run do |config|
 
   config.vm.forward_port 3000, 3000
 
+  config.vm.synced_folder "PLEASE PLACETHE PATH YOU WANT TO BE SYNCED"
+
   #config.vm.provision :puppet,
   #  :manifests_path => 'puppet/manifests',
   #  :module_path    => 'puppet/modules'
