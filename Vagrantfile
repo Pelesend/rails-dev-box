@@ -5,11 +5,14 @@ Vagrant::Config.run do |config|
 
   config.vm.forward_port 3000, 3000
 
-  config.vm.synced_folder "PLEASE PLACETHE PATH YOU WANT TO BE SYNCED"
+  Vagrant.configure("2") do |config|
+    config.vm.synced_folder "/Users/kiote/www/", "/home/vagrant/www"
+    config.vm.synced_folder ".", "/vagrant", :nfs => true
+  end
 
-  #config.vm.provision :puppet,
-  #  :manifests_path => 'puppet/manifests',
-  #  :module_path    => 'puppet/modules'
+  config.vm.provision :puppet,
+    :manifests_path => 'puppet/manifests',
+    :module_path    => 'puppet/modules'
 
   config.vm.provision :shell, inline: <<-EOF
 sudo -u vagrant -H bash -l -c 'rvm autolibs enable'
